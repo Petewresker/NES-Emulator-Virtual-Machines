@@ -23,6 +23,7 @@ public:
     uint8_t  stkp   = 0x00;
     uint16_t pc     = 0x0000;
     uint8_t  status = 0x00;
+    uint8_t  cycles = 0;
 
     // 2. Flags Enumeration (ตัวบอกสถานะ)
     enum FLAGS6502
