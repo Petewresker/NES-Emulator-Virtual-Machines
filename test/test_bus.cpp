@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Bus.h"
+#include "../include/Bus.h"
 
 int main() {
     Bus b;

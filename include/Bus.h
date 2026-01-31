@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <array>
-#include "olc6502.h"
+#include "../include/olc6502.h"
 
 class Bus {
 public:

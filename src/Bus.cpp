@@ -1,4 +1,4 @@
-#include "Bus.h"
+#include "../include/Bus.h"
 
 Bus::Bus() { 
     ram.fill(0x00); 
