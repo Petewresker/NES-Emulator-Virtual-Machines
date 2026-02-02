@@ -75,7 +75,8 @@ private:
 	uint16_t addr_rel    = 0x00;   
 	uint8_t  opcode      = 0x00;  
 	// uint8_t  cycles      = 0;	   
-	uint32_t clock_count = 0;	 
+	uint32_t clock_count = 0;	
+    
 
     // 6. Addressing Modes & Opcodes (จองชื่อไว้ก่อน)
     uint8_t IMP();	uint8_t IMM();	
