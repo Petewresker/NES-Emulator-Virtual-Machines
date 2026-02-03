@@ -8,7 +8,6 @@
 
 
 class Bus;
-using namespace std;
 
 class olc6502
 {
@@ -26,6 +25,8 @@ public:
     uint8_t  status = 0x00;
     uint8_t  cycles = 0;
 
+    void ConnectBus(Bus *n) { bus = n; }
+    
     // 2. Flags Enumeration (ตัวบอกสถานะ)
     enum FLAGS6502
     {
@@ -39,32 +40,39 @@ public:
         N = (1 << 7), // Negative
     };
 
-    // 3. Communications (สะพานเชื่อม)
-    void ConnectBus(Bus *n) { bus = n; }
-    Bus *bus = nullptr;
 
     // 4. External Signals (ปุ่มกด/สัญญาณจากภายนอก)
     void reset();
+    void irq();
+    void nmi();
     void clock();  
+
+    bool complete();
+
+    std::map<uint16_t,std::string> disassemble(uint16_t nStart, uint16_t nStop); 
+
+private:    
+
+    // 3. Communications (สะพานเชื่อม)
+    
+    Bus *bus = nullptr;
 
     // 5. Helper Functions (ตัวช่วยภายใน)
     uint8_t read(uint16_t a);
-    void    write(uint16_t a, uint8_t d);    
+    void    write(uint16_t a, uint8_t d);  
     
+    uint8_t fetch();
     
     struct INSTRUCTION
 	{
-		string name;		
+		std::string name;		
 		uint8_t     (olc6502::*operate )(void) = nullptr;
 		uint8_t     (olc6502::*addrmode)(void) = nullptr;
 		uint8_t     cycles = 0;
 	};
 
-	vector<INSTRUCTION> lookup;
+	std::vector<INSTRUCTION> lookup;
 
-private:
-    
-    uint8_t fetch();
 
     uint8_t GetFlag(FLAGS6502 f);
 	void    SetFlag(FLAGS6502 f, bool v);
